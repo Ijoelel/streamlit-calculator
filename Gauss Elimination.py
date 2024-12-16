@@ -26,10 +26,18 @@ def gauss_elimination():
     print("\nMatriks setelah eliminasi maju:")
     print(augmented_matrix)
 
+    # Substitusi balik
     solutions = np.zeros(n)
     for i in range(n - 1, -1, -1):
         solutions[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i+1:n], solutions[i+1:])) / augmented_matrix[i, i]
 
+    # Tampilkan solusi
     print("\nSolusi:")
     for i in range(n):
         print(f"x{i + 1} = {solutions[i]:.4f}")
+
+
+
+# Jalankan program
+if __name__ == "__main__":
+    gauss_elimination()

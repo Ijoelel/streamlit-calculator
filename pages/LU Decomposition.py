@@ -18,10 +18,9 @@ if xsize > 0:
     edited_df = st.data_editor(df)
 
     matrix = edited_df.to_numpy()
-    P, L, U = ludec.lu_decomposition(matrix)
+    L, U = ludec.lu_no_pivoting(matrix)
 
     if st.button("Calculate"):  # Tombol untuk memulai perhitungan
-        print(P)
         l_df = pd.DataFrame(L, columns=(i for i in range(len(L))))
         st.write("Lower Triangle")
         st.table(l_df)

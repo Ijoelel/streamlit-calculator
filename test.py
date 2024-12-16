@@ -1,15 +1,4 @@
 import numpy as np
-from scipy.linalg import lu
-
-def lu_decomposition(matrix):
-    """Fungsi untuk melakukan LU Decomposition"""
-    try:
-        P, L, U = lu(matrix)
-        print(L, matrix)
-        return P, L, U
-    except Exception as e:
-        print(f"Error dalam melakukan LU Decomposition: {e}")
-        return None, None, None
 
 def lu_no_pivoting(A):
     """
@@ -36,9 +25,23 @@ def lu_no_pivoting(A):
     
     return L, U
 
-def validate_lu(P, A, L, U):
-    """Fungsi untuk memvalidasi P * A = L * U"""
-    PA = np.dot(P, A)
-    LU = np.dot(L, U)
+# Example matrix
+A = np.array([
+    [2, -4, 3, -2],
+    [4, 1, 2, 3],
+    [5, -2, 3, -1],
+    [2, 3, 5, -2]
+])
 
-    return 0 if np.allclose(PA, LU) else 1
+# Perform LU decomposition without pivoting
+L, U = lu_no_pivoting(A)
+
+print("Matrix L (Lower Triangular):")
+print(L)
+
+print("\nMatrix U (Upper Triangular):")
+print(U)
+
+# Verify: Does L @ U equal A?
+print("\nVerification: Does L @ U equal A?")
+print(np.allclose(L @ U, A))
